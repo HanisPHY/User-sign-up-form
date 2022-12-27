@@ -1,39 +1,49 @@
 import logo from './logo.svg';
 import './App.css';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const status = ['freshman', 'sophomore', 'junior', 'senior'];
 
 function App(){
 
-  const [name, setName] = useState('your name');
-  const [age, setAge] = useState('your age');
-  const [fresh, setFresh] = useState(0);
-  const [sopho, setSopho] = useState(0);
-  const [junior, setJunior] = useState(0);
-  const [senior, setSenior] = useState(0);
+  const [name, setName] = useState('');
+  const [age, setAge] = useState('');
+  const [year, setYear] = useState('');
   const [isSubmit, setSubmit] = useState(false);
-  const [list, setList] = useState([]);
-  let year = 0;
-  if(fresh != 0)
-    year = fresh;
-  if(sopho != 0)
-    year = sopho;
-  if(junior != 0)
-    year = junior;
-  if(senior != 0)
-    year = senior;
+  const [id, setId] = useState(0);
+  const [form, setForm] = useState([{}]);
 
-  /*const listItems = list.map((list) => {
-    return ({list})
-  })*/
   
+  function ShowForm(props) {
+    return (
+      <>
+        {props.user.name} + {props.user.age} + {props.user.year}
+      </>
+    )
+  }
+  
+  
+  function ShowForm2(props) {
+    return (
+      <>
+        <td></td>
+        <td>{props.user.name}</td>
+        <td>{props.user.age}</td>
+        <td>{props.user.year}</td>
+        <td>{props.user.id}</td>
+        <td><button>Remove</button></td>
+      </>
+    )
+  }
+  
+
   return(
     <div>
       {
         isSubmit
         ? 
         <div className="after">
+          {/* form is submitted */}
           <h1>You've signed up!</h1>
           <button className="submit" type="button"
             onClick={() => setSubmit(false)}>Sign up for another account</button>
@@ -44,11 +54,11 @@ function App(){
           <form>
             {/* name and age */}
             <label>Name:</label><br></br>
-            <input type="text" name="name" value={name} 
+            <input type="text" name="name" placeholder='Your name' 
               onChange={(event) => setName(event.target.value)}/><br></br>
     
             <label>Age:</label><br></br>
-            <input type="text" name="age" value={age}
+            <input type="text" name="age" placeholder='Your age'
               onChange={(event) => setAge(event.target.value)}/>
     
             {/* status */}
@@ -57,53 +67,153 @@ function App(){
                 Your status:
               </div>
     
-              <input type="radio" name="status1" value={fresh}
-                onChange={(event) => setFresh(event.target.value)}/>
+              <input type="radio" name="status1" value="fresh"
+                onChange={(event) => setYear(event.target.value)}/>
               <label>freshman</label>
               <br></br>
     
-              <input type="radio" name="status1" value={sopho}
-                onChange={(event) => setSopho(event.target.value)}/>
+              <input type="radio" name="status1" value="sopho"
+                onChange={(event) => setYear(event.target.value)}/>
               <label>sophomore</label>
               <br></br>
     
-              <input type="radio" name="status1" value={junior}
-                onChange={(event) => setJunior(event.target.value)}/>
+              <input type="radio" name="status1" value="junior"
+                onChange={(event) => setYear(event.target.value)}/>
               <label>junior</label>
               <br></br>
     
-              <input type="radio" name="status1" value={senior}
-                onChange={(event) => setSenior(event.target.value)}/>
+              <input type="radio" name="status1" value="senior"
+                onChange={(event) => setYear(event.target.value)}/>
               <label>senior</label>
               <br></br>
               <button type="button" value="submit" 
                 onClick={() => {
-                  {
-                    setSubmit(true); 
-                    setList([...list,
-                      {Name: name, Age:age, Year: year}]
-                    )
-                  }
+                  return (
+                    setSubmit(true),
+                    setForm( () => [
+                      
+                      ...form,
+                      {
+                        id: id,
+                        name: name,
+                        age: age,
+                        year: year
+                      }
+                      
+                      /*
+                      form.concat(
+                        {
+                          id: id,
+                          name: name,
+                          age: age,
+                          year: year
+                        }
+                      )
+                      */
+                    ]),
+                    setId(id+1)
+                  )
                 }}
               >submit</button>
               
             </div>
           </form>
+          
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Year</th>
+                <th>id</th>
+                <th>choices</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>preview</td>
+                <td>{name}</td>
+                <td>{age}</td>
+                <td>{year}</td>
+                <td>{id}</td>
+                <td><button>Remove</button></td>
+              </tr>
+
+              {form.map((user, index) => 
+                (<tr key = {index}><ShowForm2 key = {index} user={user}/></tr>))
+              }
+              
+            </tbody>
+          </table>
+
         </div>
       }
 
-      <table>
-        <tr>
-          <th>Name</th>
-          <th>Age</th>
-          <th>Year</th>
-        </tr>
-        <tr>
-          <td>{name}</td>
-          <td>{age}</td>
-          <td>{year}</td>
-        </tr>
+      {/*
+      <ul>
+        <li>this is the list</li>
+        {form.map((user, index) => 
+          {
+            return (
+            <li key={index}>{user.name} - {user.age}</li>)
+          })
+        }
+        <li>end of the list</li>
+      </ul>*/}
+
+      <ul className='hidden'>
+        <li>this is the list</li>
+        {form.map((user, index) => 
+          (<li key = {index}><ShowForm user={user}/></li>))
+        }
+        <li>end of the list</li>
+      </ul>
+
+      {/*
+      <p>
+        paragraph
+        {form.map((user) => (
+          {age: user.age, name: user.name}
+        ))}
+        ---
+      </p>
+      */}
+      
+      {/*
+      <ul>
+        <li>{form.age} + {form.name} + {form.year}</li>
+        {<ShowForm age = {form.age} name = {form.name} year = {form.year} key = {form.id}/>}
+      </ul>
+      */}
+
+      
+      <table className='hidden'>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Year</th>
+            <th>id</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>preview</td>
+            <td>{name}</td>
+            <td>{age}</td>
+            <td>{year}</td>
+            <td>{id}</td>
+          </tr>
+          
+          {form.map((user, index) => 
+            (<ShowForm2 key = {index} user={user}/>))
+          }
+          
+        </tbody>
       </table>
+      
     </div>
   )
 }
