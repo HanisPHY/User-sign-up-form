@@ -27,10 +27,10 @@ function App(){
     return (
       <>
         <td></td>
+        <td>{props.user.id}</td>
         <td>{props.user.name}</td>
         <td>{props.user.age}</td>
         <td>{props.user.year}</td>
-        <td>{props.user.id}</td>
         <td><button>Remove</button></td>
       </>
     )
@@ -43,110 +43,116 @@ function App(){
         isSubmit
         ? 
         <div className="after">
-          {/* form is submitted */}
-          <h1>You've signed up!</h1>
-          <button className="submit" type="button"
-            onClick={() => setSubmit(false)}>Sign up for another account</button>
+          <div className='subContainer'>
+            {/* form is submitted */}
+            <h1>You've signed up!</h1>
+            <button className="submit" type="button"
+              onClick={() => setSubmit(false)}>Sign up for another account</button>
+          </div>
         </div>
 
         :
         <div>
           <form>
-            {/* name and age */}
-            <label>Name:</label><br></br>
-            <input type="text" name="name" placeholder='Your name' 
-              onChange={(event) => setName(event.target.value)}/><br></br>
-    
-            <label>Age:</label><br></br>
-            <input type="text" name="age" placeholder='Your age'
-              onChange={(event) => setAge(event.target.value)}/>
-    
-            {/* status */}
-            <div className="status">
-              <div>
-                Your status:
-              </div>
-    
-              <input type="radio" name="status1" value="fresh"
-                onChange={(event) => setYear(event.target.value)}/>
-              <label>freshman</label>
-              <br></br>
-    
-              <input type="radio" name="status1" value="sopho"
-                onChange={(event) => setYear(event.target.value)}/>
-              <label>sophomore</label>
-              <br></br>
-    
-              <input type="radio" name="status1" value="junior"
-                onChange={(event) => setYear(event.target.value)}/>
-              <label>junior</label>
-              <br></br>
-    
-              <input type="radio" name="status1" value="senior"
-                onChange={(event) => setYear(event.target.value)}/>
-              <label>senior</label>
-              <br></br>
-              <button type="button" value="submit" 
-                onClick={() => {
-                  return (
-                    setSubmit(true),
-                    setForm( () => [
-                      
-                      ...form,
-                      {
-                        id: id,
-                        name: name,
-                        age: age,
-                        year: year
-                      }
-                      
-                      /*
-                      form.concat(
+            <div className='formContainer'>
+              {/* name and age */}
+              <label>Name:</label><br></br>
+              <input type="text" name="name" placeholder='Your name' 
+                onChange={(event) => setName(event.target.value)}/><br></br>
+      
+              <label>Age:</label><br></br>
+              <input type="text" name="age" placeholder='Your age'
+                onChange={(event) => setAge(event.target.value)}/>
+      
+              {/* status */}
+              <div className="status">
+                <div>
+                  Your status:
+                </div>
+      
+                <input type="radio" name="status1" value="fresh"
+                  onChange={(event) => setYear(event.target.value)}/>
+                <label>freshman</label>
+                <br></br>
+      
+                <input type="radio" name="status1" value="sopho"
+                  onChange={(event) => setYear(event.target.value)}/>
+                <label>sophomore</label>
+                <br></br>
+      
+                <input type="radio" name="status1" value="junior"
+                  onChange={(event) => setYear(event.target.value)}/>
+                <label>junior</label>
+                <br></br>
+      
+                <input type="radio" name="status1" value="senior"
+                  onChange={(event) => setYear(event.target.value)}/>
+                <label>senior</label>
+                <br></br>
+                <button type="button" value="submit" 
+                  onClick={() => {
+                    return (
+                      setSubmit(true),
+                      setForm( () => [
+                        
+                        ...form,
                         {
                           id: id,
                           name: name,
                           age: age,
                           year: year
                         }
-                      )
-                      */
-                    ]),
-                    setId(id+1)
-                  )
-                }}
-              >submit</button>
-              
+                        
+                        /*
+                        form.concat(
+                          {
+                            id: id,
+                            name: name,
+                            age: age,
+                            year: year
+                          }
+                        )
+                        */
+                      ]),
+                      setId(id+1)
+                    )
+                  }}
+                >submit</button>
+                
+              </div>
             </div>
           </form>
           
-          <table>
-            <thead>
-              <tr>
-                <th></th>
-                <th>Name</th>
-                <th>Age</th>
-                <th>Year</th>
-                <th>id</th>
-                <th>choices</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>preview</td>
-                <td>{name}</td>
-                <td>{age}</td>
-                <td>{year}</td>
-                <td>{id}</td>
-                <td><button>Remove</button></td>
-              </tr>
+          <div className='tableContainer'>
+            <table>
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>id</th>
+                  <th>Name</th>
+                  <th>Age</th>
+                  <th>Year</th>
+                  
+                  <th>choices</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>preview</td>
+                  <td>{id}</td>
+                  <td>{name}</td>
+                  <td>{age}</td>
+                  <td>{year}</td>
+                  <td><button>Remove</button></td>
+                </tr>
 
-              {form.map((user, index) => 
-                (<tr key = {index}><ShowForm2 key = {index} user={user}/></tr>))
-              }
-              
-            </tbody>
-          </table>
-
+                {form.map((user, index) => 
+                  (<tr key = {index}><ShowForm2 key = {index} user={user}/></tr>))
+                }
+                
+              </tbody>
+            </table>
+          </div>
         </div>
       }
 

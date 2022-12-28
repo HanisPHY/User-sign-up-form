@@ -47,3 +47,21 @@ table, th, td{
 .hidden {
   display: none;
 }
+
+form {
+  display: flex;
+  justify-content: center;
+}
+
+.tableContainer {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin: 20px;
+}
+
+.after {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
