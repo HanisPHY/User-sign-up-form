@@ -12,7 +12,7 @@ function App(){
   const [isSubmit, setSubmit] = useState(false);
   const [id, setId] = useState(0);
   const [form, setForm] = useState([{}]);
-
+  const [isAdmin, setAdmin] = useState(false);
   
   function ShowForm(props) {
     return (
@@ -35,6 +35,60 @@ function App(){
       </>
     )
   }
+
+  /*
+  function AdminMode(name, age) {
+    if ((name === "admin") || (age === "123456")) {
+      setAdmin(true);
+    }
+  }
+  */
+
+  /*
+  function AdminMode(props) {
+    if ((props.name === "admin") || (props.age === "123456")) {
+      setAdmin(true);
+    }
+  }
+  */
+
+  
+  const AdminMode = (name, age) => {
+    if ((name === "admin") && (age === "123456")) {
+      alert("administration mode");
+      setAdmin(true);
+      setSubmit(true);
+    }
+    else {
+      HandleSubmit();
+    }
+  }
+  
+  
+  const HandleSubmit = () => (
+    setSubmit(true),
+    setForm( () => [
+      ...form,
+      {
+        id: id,
+        name: name,
+        age: age,
+        year: year
+      }
+      
+      /*
+      form.concat(
+        {
+          id: id,
+          name: name,
+          age: age,
+          year: year
+        }
+      )
+      */
+    ]),
+    setId(id+1)
+  )
   
 
   return(
@@ -53,6 +107,7 @@ function App(){
 
         :
         <div>
+
           <form>
             <div className='formContainer'>
               {/* name and age */}
@@ -92,29 +147,9 @@ function App(){
                 <button type="button" value="submit" 
                   onClick={() => {
                     return (
-                      setSubmit(true),
-                      setForm( () => [
-                        
-                        ...form,
-                        {
-                          id: id,
-                          name: name,
-                          age: age,
-                          year: year
-                        }
-                        
-                        /*
-                        form.concat(
-                          {
-                            id: id,
-                            name: name,
-                            age: age,
-                            year: year
-                          }
-                        )
-                        */
-                      ]),
-                      setId(id+1)
+                      
+                      AdminMode(name, age)
+                      /*<AdminMode name={name} age={age}/>*/
                     )
                   }}
                 >submit</button>
@@ -122,6 +157,19 @@ function App(){
               </div>
             </div>
           </form>
+
+        </div>
+      }
+
+
+      {
+        isAdmin
+        ?
+        <div className='adminMode'>
+          {/* Show the table below the form */}
+          <div className='adminRmd'>
+            <p>Administration mode.</p>
+          </div>
           
           <div className='tableContainer'>
             <table>
@@ -153,7 +201,17 @@ function App(){
               </tbody>
             </table>
           </div>
-        </div>
+
+          <br></br>
+
+          <div className='adminExitBtn'>
+            <button className='exitAdmin'
+              onClick={() => (setAdmin(false), setSubmit(false))}>Exit</button>
+          </div>
+        </div>        
+
+        :
+        <></>
       }
 
       {/*

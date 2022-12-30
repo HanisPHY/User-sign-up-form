@@ -65,3 +65,13 @@ form {
   justify-content: center;
   text-align: center;
 }
+
+.adminRmd {
+  display: flex;
+  justify-content: center;
+}
+
+.adminExitBtn {
+  display: flex;
+  justify-content: center;
+}
