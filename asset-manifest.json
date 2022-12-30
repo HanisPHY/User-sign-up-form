@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/User-sign-up-form/static/css/main.9dedba6a.css",
+    "main.js": "/User-sign-up-form/static/js/main.968ad487.js",
+    "static/js/787.28cb0dcd.chunk.js": "/User-sign-up-form/static/js/787.28cb0dcd.chunk.js",
+    "static/media/logo.svg": "/User-sign-up-form/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/User-sign-up-form/index.html",
+    "main.9dedba6a.css.map": "/User-sign-up-form/static/css/main.9dedba6a.css.map",
+    "main.968ad487.js.map": "/User-sign-up-form/static/js/main.968ad487.js.map",
+    "787.28cb0dcd.chunk.js.map": "/User-sign-up-form/static/js/787.28cb0dcd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9dedba6a.css",
+    "static/js/main.968ad487.js"
+  ]
+}
