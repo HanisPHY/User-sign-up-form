@@ -55,11 +55,9 @@ function App(){
 
   
   const AdminMode = (name, age) => {
-    if ((name === "admin") && (age === "123456")) {
+    if ((name === "admin") && (age === "123456") && (year === "sopho")) {
       alert("administration mode");
       setAdmin(true);
-      setSubmit(true);
-      setSubmit(false);
     }
     else {
       HandleSubmit();
@@ -154,7 +152,7 @@ function App(){
                 <button type="button" value="submit" 
                   onClick={() => {
                     return (
-                      AdminMode(name, age)
+                      AdminMode(name, age, year)
                       /*<AdminMode name={name} age={age}/>*/
                     )
                   }}
