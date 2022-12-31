@@ -31,7 +31,8 @@ function App(){
         <td>{props.user.name}</td>
         <td>{props.user.age}</td>
         <td>{props.user.year}</td>
-        <td><button>Remove</button></td>
+        <td><button className='delBtn'
+              onClick={() => handleDelete(props.user.id)}>Remove</button></td>
       </>
     )
   }
@@ -58,6 +59,7 @@ function App(){
       alert("administration mode");
       setAdmin(true);
       setSubmit(true);
+      setSubmit(false);
     }
     else {
       HandleSubmit();
@@ -89,7 +91,12 @@ function App(){
     ]),
     setId(id+1)
   )
-  
+
+  const handleDelete = (Id) => {
+    const newForm = form.filter((item) => (item.id != Id));
+
+    setForm(newForm);
+  }
 
   return(
     <div>
@@ -147,7 +154,6 @@ function App(){
                 <button type="button" value="submit" 
                   onClick={() => {
                     return (
-                      
                       AdminMode(name, age)
                       /*<AdminMode name={name} age={age}/>*/
                     )
