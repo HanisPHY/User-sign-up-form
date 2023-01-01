@@ -96,6 +96,12 @@ function App(){
     setForm(newForm);
   }
 
+  function handleClear() {
+    setName('');
+    setAge('');
+    setYear('');
+  }
+
   return(
     <div>
       {
@@ -117,11 +123,11 @@ function App(){
             <div className='formContainer'>
               {/* name and age */}
               <label>Name:</label><br></br>
-              <input type="text" name="name" placeholder='Your name' 
+              <input type="text" name="name" placeholder='Your name' value={name}
                 onChange={(event) => setName(event.target.value)}/><br></br>
       
               <label>Age:</label><br></br>
-              <input type="text" name="age" placeholder='Your age'
+              <input type="text" name="age" placeholder='Your age' value={age}
                 onChange={(event) => setAge(event.target.value)}/>
       
               {/* status */}
@@ -130,32 +136,32 @@ function App(){
                   Your status:
                 </div>
       
-                <input type="radio" name="status1" value="fresh"
+                <input type="radio" name="status1" value="fresh" checked={year === 'fresh'}
                   onChange={(event) => setYear(event.target.value)}/>
                 <label>freshman</label>
                 <br></br>
       
-                <input type="radio" name="status1" value="sopho"
+                <input type="radio" name="status1" value="sopho" checked={year === 'sopho'}
                   onChange={(event) => setYear(event.target.value)}/>
                 <label>sophomore</label>
                 <br></br>
       
-                <input type="radio" name="status1" value="junior"
+                <input type="radio" name="status1" value="junior" checked={year === 'junior'}
                   onChange={(event) => setYear(event.target.value)}/>
                 <label>junior</label>
                 <br></br>
       
-                <input type="radio" name="status1" value="senior"
+                <input type="radio" name="status1" value="senior" checked={year === 'senior'}
                   onChange={(event) => setYear(event.target.value)}/>
                 <label>senior</label>
                 <br></br>
                 <button type="button" value="submit" 
                   onClick={() => {
-                    return (
-                      AdminMode(name, age, year)
+                      AdminMode(name, age, year);
                       /*<AdminMode name={name} age={age}/>*/
-                    )
-                  }}
+                      handleClear();
+                    }
+                  }
                 >submit</button>
                 
               </div>
